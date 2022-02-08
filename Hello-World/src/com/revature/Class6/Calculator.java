@@ -63,14 +63,12 @@ public class Calculator {
                     System.out.println("Answer: " + (input1 + input2));
                     break;
                 case 2:
-                    //code for which way to subtract
                     System.out.println("Answer: " + (input1 - input2));
                     break;
                 case 3:
                     System.out.println("Answer: " + (input1 * input2));
                     break;
                 case 4:
-                    //code for which way to divide
                     System.out.println("Answer: " + (input1 / input2));
             }
             //operation complete, repeat or exit
