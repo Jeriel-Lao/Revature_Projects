@@ -1,4 +1,4 @@
-package com.revature.Class6;
+package com.revature.Calculator;
 
 import java.util.Scanner;
 

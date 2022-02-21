@@ -1,4 +1,4 @@
-package com.revature.Class2;
+package com.revature.HelloWorld;
 
 public class HelloWorld {
     public static void main(String[] args) {
