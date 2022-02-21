@@ -83,7 +83,7 @@ class Actions {
                     try {
                         System.out.print("Enter Password: ");
                         password = scan.next();
-                        System.out.println("Are you sure? Type 'y' for yes or 'n' for no: ");
+                        System.out.print("Are you sure? Type 'y' for yes or 'n' for no: ");
                         String check = scan.next();
                         if(check.equalsIgnoreCase("n")) {
                             throw new PasswordConfirmException();
@@ -107,7 +107,7 @@ class Actions {
                             validInput = false;
                         }
                     } while (!validInput);
-                    System.out.print("Set up a name for your first account (or default for default): ");
+                    System.out.print("Set up a name for your first account (or Default for default): ");
                     accountName = scan.next();
                     login1 = new Login(username, password, true);
                     createAccount(loginDao, accountDao, login1, accountName, balance);
@@ -193,9 +193,9 @@ class Actions {
 
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
-
+                sleep(1500);
+                wipeScreen();
                 scan.next(); //clears the scanner stack
-                field = 3;
                 validInput = false;
             }
             sleep(100);
@@ -330,16 +330,24 @@ class Actions {
                         case 1 -> {
                             wipeScreen();
                             List<TransactionLog> list = transactionLogDao.getTransactionLog();
-                            for (TransactionLog transactionLog : list) {
-                                System.out.println(transactionLog.toString());
+                            if(!list.isEmpty()) {
+                                for (TransactionLog transactionLog : list) {
+                                    System.out.println(transactionLog.toString());
+                                }
+                            } else {
+                                throw new EmptyLogException();
                             }
                             sleep(2000);
                         }
                         case 2 -> {
                             wipeScreen();
                             List<AccountLog> history = accountLogDao.getAccountLog();
-                            for (AccountLog accountLog : history) {
-                                System.out.println(accountLog.toString());
+                            if (!history.isEmpty()) {
+                                for (AccountLog accountLog : history) {
+                                    System.out.println(accountLog.toString());
+                                }
+                            } else {
+                                throw new EmptyLogException();
                             }
                             sleep(2000);
                         }
@@ -349,6 +357,8 @@ class Actions {
                 } catch (NullPointerException e) {
                     System.out.println("That log is currently unavailable. Please try again later.");
                     sleep(1500);
+                } catch (EmptyLogException e) {
+                    e.getMessage();
                 }
                 break;
             case 5:
