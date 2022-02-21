@@ -613,7 +613,9 @@ class Actions {
                         throw new AccountPendingException();
                     }
                     if (login2 == null && amount != 0.0) {
-                        account1.setBalance(account1.getBalance() + amount);
+                        if(validTransaction) {
+                            account1.setBalance(account1.getBalance() + amount);
+                        }
                         transactionDao.addTransaction(new Transaction(login1.getId(), account1.getAcctId(), false, validTransaction, amount));
                         accountDao.updateAccount(new Account(login1.getId(), account1.getAcctId(), account1.getName(), account1.getBalance(), account1.isPending()));
                         transactionLogDao.addTransactionLog(new TransactionLog(login1.getId(), account1.getAcctId(), validTransaction, amount, date));
