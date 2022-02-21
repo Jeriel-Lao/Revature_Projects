@@ -105,6 +105,7 @@ public class AccountDaoImpl implements AccountDao {
                 resultSet.getString("acct_name"),
                 resultSet.getDouble("balance"),
                 resultSet.getBoolean("is_pending"));
+
     }
 }
 

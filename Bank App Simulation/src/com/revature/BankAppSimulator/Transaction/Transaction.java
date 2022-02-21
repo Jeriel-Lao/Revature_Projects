@@ -79,6 +79,10 @@ public class Transaction {
         return isPending;
     }
 
+    public void setPending(boolean pending) {
+        isPending = pending;
+    }
+
     public boolean isValid() {
         return isValid;
     }

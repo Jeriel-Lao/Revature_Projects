@@ -37,6 +37,17 @@ public class TransactionDaoImpl implements TransactionDao{
         preparedStatement.executeUpdate();
     }
 
+    public void updateTransaction(Transaction transaction) throws SQLException {
+        String sql = "update transaction set is_pending = false where user_id1 = ? and user_id2 = ? and acct_id1 = ? and acct_id2 = ? and is_pending = true and balance = ? limit 1";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, transaction.getUserId1());
+        preparedStatement.setInt(2, transaction.getUserId2());
+        preparedStatement.setInt(3, transaction.getAcctId1());
+        preparedStatement.setInt(4, transaction.getAcctId2());
+        preparedStatement.setDouble(5, transaction.getBalance());
+        preparedStatement.executeUpdate();
+    }
+
     public List<Transaction> getTransactions() throws SQLException {
         List<Transaction> transactions = new ArrayList<>();
         Statement statement = connection.createStatement();

@@ -4,15 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class TransactionLog {
-    private int userId;
-    private int acctId;
-    private boolean isValid;
+    private final int userId;
+    private final int acctId;
+    private final boolean isValid;
     private double amount;
-    private String date;
+    private final String date;
 
-    public TransactionLog() {
-
-    }
     public TransactionLog(int userId, int acctId, boolean isValid, double amount, String date) {
         this.userId = userId;
         this.acctId = acctId;

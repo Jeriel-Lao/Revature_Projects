@@ -451,6 +451,8 @@ class Actions {
                                 java.util.Date dt = new java.util.Date();
                                 date = sdf.format(dt);
                                 if (check.equalsIgnoreCase("y")) {
+                                    transaction.setPending(false);
+                                    transactionDao.updateTransaction(transaction);
                                     double amount = -transaction.getBalance();
                                     account2 = accountDao.getAccountById(transaction.getUserId1(), transaction.getAcctId1());
                                     account2.setBalance(account2.getBalance() + amount);
@@ -518,7 +520,7 @@ class Actions {
                     try {
                         System.out.print("\nEnter amount here: ");
                         amount = scan.nextDouble();
-                        validTransaction = !(amount < 0) && ((amount % 0.01) == 0);
+                        validTransaction = (amount > 0) && ((amount % 0.01) == 0);
                     } catch (InputMismatchException e) {
                         System.out.println("Invalid input. Please try again.");
                         scan.nextLine();
