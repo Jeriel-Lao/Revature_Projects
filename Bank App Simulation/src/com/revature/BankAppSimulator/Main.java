@@ -93,14 +93,15 @@ class Actions {
                     }
                     do {
                         try {
+                            validInput = true;
                             System.out.print("Select what amount you would like to deposit into your first account: ");
                             balance = scan.nextDouble();
-                            if (balance < 0) {
+                            if (balance < 0 || ((balance % 0.01) != 0)) {
                                 throw new InvalidInputException();
                             }
                         } catch (InvalidInputException e) {
                             e.getMessage();
-                            break;
+                            validInput = false;
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input. Please try again.\n");
                             scan.nextLine(); //clears the scanner stack
